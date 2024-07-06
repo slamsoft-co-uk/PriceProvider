@@ -1,0 +1,6 @@
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"instrumentId\": \"In001\"}" "http://localhost:8080/getVendorsForInstrument"
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"vendorId\": \"V001\"}" "http://localhost:8080/getPricesForVendor"
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"instrumentId\": \"In015\", \"instrumentDescription\": \"This is the description for In015\"}" "http://localhost:8080/addInstrument"
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"vendorId\": \"V999\", \"vendorDescription\": \"Vendor Name V999\"}" "http://localhost:8080/addVendor"
+curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X POST --data "{\"instrumentId\": \"In001\", \"vendorId\": \"V001\", \"price\": \"98765.1234\"}" "http://localhost:8080/publishPrices"
+

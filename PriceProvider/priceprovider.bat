@@ -1,0 +1,1 @@
+"%JAVA_HOME%"\bin\java -jar price-provider-1.0.jar
