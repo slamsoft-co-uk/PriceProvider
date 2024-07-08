@@ -2,8 +2,8 @@ package org.matsuri.customerservice.external.webcontrollers;
 
 import org.junit.jupiter.api.Test;
 import org.matsuri.customerservice.external.dao.entities.InstrumentIdVendorId;
-import org.matsuri.customerservice.external.dao.entities.VendorPriceList;
-import org.matsuri.customerservice.external.dao.repositories.VendorPriceListRepository;
+import org.matsuri.customerservice.external.dao.entities.VendorPrices;
+import org.matsuri.customerservice.external.dao.repositories.VendorPricesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,7 +28,7 @@ public class PublishPriceControllerTest {
     MockMvc mockMvc;
 
     @MockBean
-    VendorPriceListRepository vendorPriceListRepository;
+    VendorPricesRepository vendorPricesRepository;
 
     @Test
     void testPublishPricesController() throws Exception {
@@ -37,9 +36,9 @@ public class PublishPriceControllerTest {
         LocalDateTime now = LocalDateTime.now();
         String instrumentId = "In003";
         String vendorId = "V002";
-        VendorPriceList vendorPriceList = new VendorPriceList(new InstrumentIdVendorId(instrumentId, vendorId), 224.75, now);
+        VendorPrices vendorPrices = new VendorPrices(new InstrumentIdVendorId(instrumentId, vendorId), 224.75, now);
         String expected = String.format("Insertion of a new price for instrument %s, vendor %s complete", instrumentId, vendorId);
-        when(vendorPriceListRepository.updateOrInsert(any())).thenReturn(vendorPriceList);
+        when(vendorPricesRepository.updateOrInsert(any())).thenReturn(vendorPrices);
 
         assertEquals(expected,
                 this.mockMvc.perform(post("/publishPrices")

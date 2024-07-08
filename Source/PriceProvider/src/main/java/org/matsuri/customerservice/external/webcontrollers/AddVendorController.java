@@ -3,6 +3,8 @@ package org.matsuri.customerservice.external.webcontrollers;
 import org.matsuri.customerservice.external.dao.entities.Vendor;
 import org.matsuri.customerservice.external.dto.request.VendorUpdateRequest;
 import org.matsuri.customerservice.external.services.AddVendorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AddVendorController {
+
+    final Logger logger = LoggerFactory.getLogger(AddVendorController.class);
 
     private AddVendorService addVendorService;
 
@@ -27,7 +31,8 @@ public class AddVendorController {
             addVendorService.updateOrInsertUsingVendorRepository(new Vendor(vendorUpdateRequest.getVendorId(), vendorUpdateRequest.getVendorDescription()));
             return new ResponseEntity<>(String.format("Insertion of vendor %s complete", vendorUpdateRequest.getVendorId()), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Failed to insert vendor.\n" + e.getMessage(),  HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Failed to insert vendor " + e.getMessage());
+            return new ResponseEntity<>("Failed to insert vendor",  HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

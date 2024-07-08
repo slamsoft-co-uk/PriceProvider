@@ -1,5 +1,7 @@
 package org.matsuri.customerservice.external.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -9,8 +11,10 @@ import java.util.Objects;
 public class InstrumentIdVendorId implements Serializable {
 
     @Column(name = "InstrumentId")
+    @JsonProperty("InstrumentId")
     private String instrumentId;
     @Column(name = "VendorId")
+    @JsonProperty("VendorId")
     private String vendorId;
 
     public InstrumentIdVendorId() {}

@@ -2,6 +2,8 @@ package org.matsuri.customerservice.external.webcontrollers;
 
 import org.matsuri.customerservice.external.dao.entities.GetVendorsForInstrument;
 import org.matsuri.customerservice.external.services.GetVendorsForInstrumentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @RestController
 public class GetVendorsForInstrumentController {
+
+    final Logger logger = LoggerFactory.getLogger(GetVendorsForInstrumentController.class);
 
     private GetVendorsForInstrumentService getVendorsForInstrumentService;
 
@@ -27,7 +31,8 @@ public class GetVendorsForInstrumentController {
             List<GetVendorsForInstrument> vendorsForInstrument = getVendorsForInstrumentService.getVendorsForInstrument(instrumentId);
             return new ResponseEntity<>(vendorsForInstrument, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity("Failed to get vendors for instrument.\n" + e.getMessage(),  HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Failed to get vendors for instrument " + e.getMessage());
+            return new ResponseEntity("Failed to get vendors for instrument",  HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

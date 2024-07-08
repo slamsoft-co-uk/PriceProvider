@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Vendor implements Comparable<Vendor>  {
+public class Vendor {
 
     @Id
     @Column(name = "VendorId")
@@ -36,8 +36,4 @@ public class Vendor implements Comparable<Vendor>  {
         this.vendorDescription = vendorDescription;
     }
 
-    @Override
-    public int compareTo(Vendor vendor) {
-        return this.equals(vendor) ? 1 : 0;
-    }
 }

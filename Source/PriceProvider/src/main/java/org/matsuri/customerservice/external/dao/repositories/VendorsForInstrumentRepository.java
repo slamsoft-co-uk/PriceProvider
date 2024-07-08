@@ -9,7 +9,7 @@ import java.util.List;
 public interface VendorsForInstrumentRepository extends JpaRepository<GetVendorsForInstrument, String> {
 
     @Query(value = "SELECT vpl.InstrumentId, vpl.VendorId, VendorDescription, Price, PriceDate " +
-                   "FROM VendorPriceList vpl " +
+                   "FROM VendorPrices vpl " +
                    "INNER JOIN Vendor v ON vpl.VendorId = v.VendorId " +
                    "WHERE vpl.InstrumentId = :instrumentId", nativeQuery = true)
     List<GetVendorsForInstrument> getVendorsForInstrument(String instrumentId);

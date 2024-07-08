@@ -1,21 +1,22 @@
 package org.matsuri.customerservice.external.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class GetPricesForVendor implements Comparable<GetPricesForVendor> {
+public class GetPricesForVendor {
 
     @Id
-    @Column(name = "instrumentIdVendorId")
-    @JsonIgnore
+    @EmbeddedId
+    @JsonProperty("InstrumentIdVendorId")
+    @Column(name = "InstrumentIdVendorId")
     private InstrumentIdVendorId instrumentIdVendorId;
 
     @JsonProperty("InstrumentDescription")
@@ -38,11 +39,6 @@ public class GetPricesForVendor implements Comparable<GetPricesForVendor> {
         this.instrumentDescription = instrumentDescription;
         this.price = price;
         this.priceDate = priceDate;
-    }
-
-    @Override
-    public int compareTo(GetPricesForVendor o) {
-        return this.equals(o) ? 1 : 0;
     }
 
     @Override

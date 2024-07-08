@@ -40,7 +40,7 @@ public class GetVendorsForInstrumentControllerTest {
 
         LocalDateTime now = LocalDateTime.now();
         List<GetVendorsForInstrument> vendorsForInstrument = new ArrayList() {{add(new GetVendorsForInstrument(new InstrumentIdVendorId("In003", "V002"), "Vendor Name 002", 224.75, now));}};
-        String expected = "[{\"VendorDescription\":\"Vendor Name 002\",\"Price\":224.75,\"PriceDate\":\"" + now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\"}]";
+        String expected = "[{\"InstrumentIdVendorId\":{\"InstrumentId\":\"In003\",\"VendorId\":\"V002\"},\"VendorDescription\":\"Vendor Name 002\",\"Price\":224.75,\"PriceDate\":\"" + now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "\"}]";
         when(vendorsForInstrumentRepository.getVendorsForInstrument(anyString())).thenReturn(vendorsForInstrument);
 
         assertEquals(expected,
